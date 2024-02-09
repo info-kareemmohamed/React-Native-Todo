@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCompleted ,deleteTodo} from '../Redux/slice/todo.slice';
+import { addTodoCompleted , deleteTodoCompleted} from '../Redux/slice/todocompleted.slice';
 
 import {
     StyleSheet,
@@ -19,9 +20,19 @@ const HomeScreen = ({ navigation }) => {
 
     const handleToggleCompleted = (item) => {
         dispatch(toggleCompleted(item));
+      if(item.completed !=true){  
+        console.log(item.completed +"  tt");
+      dispatch(addTodoCompleted(item)) 
+      }
+      else{ 
+        console.log(item.completed +"   ff")
+      dispatch(deleteTodoCompleted(item));
+      }
     };
     const handleDelete = (item) => {
         dispatch(deleteTodo(item));
+       dispatch(deleteTodoCompleted(item));
+        
     };
 
     return (

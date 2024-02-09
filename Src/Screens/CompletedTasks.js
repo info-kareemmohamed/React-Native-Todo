@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesome } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTodo} from '../Redux/slice/todo.slice';
+
+
 import {
     StyleSheet,
     Text,
@@ -10,10 +14,13 @@ import {
 
 
 const CompletedTasksScreen = ({ navigation }) => {
-    const [todos, setTodos] = useState([
-        { title: 'hi', description: "bb", id: 5, completed: false }
-    ]);
+    const todos = useSelector((state) => state.completed.todos);
+    const dispatch = useDispatch(); 
 
+
+    const handleDelete = (item) => {
+        dispatch(deleteTodo(item));
+    };
 
 
     return (
@@ -34,6 +41,7 @@ const CompletedTasksScreen = ({ navigation }) => {
                             </View>
                             <View style={styles.icon}>
                                 <FontAwesome
+                                 onPress={() => handleDelete(item)} 
                                     name="trash"
                                     size={20}
                                     color="red"

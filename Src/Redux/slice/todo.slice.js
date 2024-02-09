@@ -17,7 +17,7 @@ const todoSlice = createSlice({
             state.todos = state.todos.map(todo => {
                 console.log(id +"    "+ todo.id);
                 if (todo.id === id) {
-                    console.log(todo.completed);
+                    
                     return { ...todo, completed: !todo.completed };
                 }
 
