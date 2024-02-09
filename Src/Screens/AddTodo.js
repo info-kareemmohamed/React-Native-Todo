@@ -59,16 +59,7 @@ export default function AddTodoScreen({navigation}) {
     buttonText: {
       color: "black",
     },
-    flatList: {
-      width: "100%",
-    },
-    item: {
-      backgroundColor: "cyan",
-      padding: 10,
-      marginVertical: 5,
-      borderRadius: 20,
-    
-    },
+   
   });
 
 
