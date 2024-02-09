@@ -19,11 +19,10 @@ export default function AddTodoScreen({ navigation }) {
 
   const addTodoToStore = () => {
     const obj = { id: Date.now(), title: title, description: description, completed: false };
-    dispatch(addTodo(obj));
+     dispatch(addTodo(obj));
     dispatch(addTodoNotCompleted(obj));
     setTitle("");
     setDescription("");
-    navigation.navigate(Home)
 
 
   };

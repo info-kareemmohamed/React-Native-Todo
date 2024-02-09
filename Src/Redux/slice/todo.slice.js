@@ -7,9 +7,33 @@ const todoSlice = createSlice({
     },
     reducers: {
         addTodo: (state, action) => {
-            state.todos = [...state.todos, action.payload];
-            console.log("yas");
-            console.log(state.todos);
+            const { title, description } = action.payload;
+            if (!title.trim() && !description.trim()) {
+              alert("Title and Description cannot be empty!");
+              
+            } else if (!title.trim() && description.trim()) {
+              alert("Title cannot be empty!");
+            } else if (title.trim() && !description.trim()) {
+              alert("Description cannot be empty!");
+            } else {
+              const existingTodo = state.todos.find(
+                (todo) =>
+                  todo.title.toLowerCase() === title.toLowerCase() &&
+                  todo.description.toLowerCase() === description.toLowerCase()
+              );
+      
+              if (!existingTodo) {
+                state.todos.push({
+                  id: Date.now().toString(),
+                  title,
+                  description,
+                  completed: false,
+                });
+              } else {
+                console.warn("Todo already exists!");
+              
+            }
+            }
         },
 
         toggleCompleted: (state, action) => {

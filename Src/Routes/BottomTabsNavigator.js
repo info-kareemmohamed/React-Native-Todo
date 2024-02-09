@@ -8,6 +8,8 @@ import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Main, CompletedTasks,NoteCompletedTasks, AddTodo } from '../constants';
 import AddTodoScreen from '../Screens/AddTodo';
+import Icon from 'react-native-vector-icons/FontAwesome'; 
+import Icon2 from 'react-native-vector-icons/AntDesign'; 
 
 
 const Tab = createBottomTabNavigator();
@@ -22,12 +24,12 @@ const BottomTabsNavigator = () => {
           tabBarIcon: () => <FontAwesome5 name="check-double" size={26} color="black" />
         }} />
  <Tab.Screen name={AddTodo} component={AddTodoScreen}options={{
-          tabBarIcon: () => <FontAwesome5 name="check-double" size={26} color="black" />
+          tabBarIcon: () => <Icon2 name="pluscircleo" size={26} color="black" />
         }} />
 
 
 <Tab.Screen name={NoteCompletedTasks} component={NoteCompletedTasksScreen}options={{
-          tabBarIcon: () => <FontAwesome5 name="check-double" size={26} color="black" />
+          tabBarIcon: () => <Icon name="frown-o" size={26} color="black" />
         }} />
     </Tab.Navigator>
   )
