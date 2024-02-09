@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesome } from '@expo/vector-icons';
 import {
     StyleSheet,
@@ -8,22 +8,24 @@ import {
     FlatList,
 } from 'react-native';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTodo} from '../Redux/slice/todo.slice';
+import { deleteTodoNotCompleted} from '../Redux/slice/todonotcompleted.slice';
+
+
 
 const NotCompletedTasks = ({ navigation }) => {
-    const [todos, setTodos] = useState([
-        { title: 'hi', description: "bb", id: 5, completed: false }
-    ]);
+    const todos = useSelector((state) => state.notcompleted.todos);
+    const dispatch = useDispatch(); 
 
 
-    const toggleCompleted = (id) => {
-        const updatedTodos = todos.map(todo => {
-            if (todo.id === id) {
-                return { ...todo, completed: !todo.completed };
-            }
-            return todo;
-        });
-        setTodos(updatedTodos);
+    const handleDelete = (item) => {
+        dispatch(deleteTodo(item));
+        dispatch(deleteTodoNotCompleted(item));
     };
+
+
+  
 
     return (
         <View>
@@ -43,18 +45,13 @@ const NotCompletedTasks = ({ navigation }) => {
                             </View>
                             <View style={styles.icon}>
                                 <FontAwesome
+                                  onPress={() => handleDelete(item)}
                                     name="trash"
                                     size={20}
                                     color="red"
                                     style={styles.icon}
                                 />
-                                <FontAwesome
-                                    onPress={() => toggleCompleted(item.id)}
-                                    name="check-circle"
-                                    size={20}
-                                    color={item.completed ? 'green' : 'black'} 
-                                    style={styles.icon}
-                                />
+                              
                             </View>
                         </View>
                     </TouchableOpacity>

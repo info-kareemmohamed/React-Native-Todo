@@ -3,6 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCompleted ,deleteTodo} from '../Redux/slice/todo.slice';
 import { addTodoCompleted , deleteTodoCompleted} from '../Redux/slice/todocompleted.slice';
+import { addTodoNotCompleted , deleteTodoNotCompleted} from '../Redux/slice/todonotcompleted.slice';
 
 import {
     StyleSheet,
@@ -23,10 +24,13 @@ const HomeScreen = ({ navigation }) => {
       if(item.completed !=true){  
         console.log(item.completed +"  tt");
       dispatch(addTodoCompleted(item)) 
-      }
+      dispatch(deleteTodoNotCompleted(item)) 
+
+    }
       else{ 
         console.log(item.completed +"   ff")
       dispatch(deleteTodoCompleted(item));
+      dispatch(addTodoNotCompleted(item));
       }
     };
     const handleDelete = (item) => {

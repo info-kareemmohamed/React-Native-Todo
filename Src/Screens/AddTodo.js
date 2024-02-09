@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../Redux/slice/todo.slice";
+import { addTodoNotCompleted } from "../Redux/slice/todonotcompleted.slice";
 
 
 import {
@@ -18,6 +19,8 @@ export default function AddTodoScreen({navigation}) {
   const addTodoToStore = () => {
     const obj = {id: Date.now(), title:title, description:description,completed:false};
     dispatch(addTodo(obj));
+    dispatch(addTodoNotCompleted(obj));
+
   };
 
   return (
