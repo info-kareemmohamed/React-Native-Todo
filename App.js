@@ -1,5 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 // import { StyleSheet, Text, View } from 'react-native';
+import Router from './Src/Routes';
 import AddTodoScreen from './Src/Screens/AddTodo';
 import CompletedTasksScreen from './Src/Screens/CompletedTasks';
 import HomeScreen from './Src/Screens/Home';
@@ -12,8 +13,8 @@ export default function App() {
     //   <Text>Open up App.js to start working on your app!</Text>
     //   <StatusBar style="auto" />
     // </View>
-    <NotCompletedTasks/>
-  );
+    <Router/>
+    );
 }
 
 
