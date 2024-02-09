@@ -1,4 +1,7 @@
-import  React from 'react';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../Redux/slice/todo.slice";
+
 
 import {
     StyleSheet,
@@ -8,19 +11,26 @@ import {
     TouchableOpacity,
   } from "react-native";
 export default function AddTodoScreen({navigation}) {
-   
-    return (
-        <View style={styles.container}>
-        <Text style={styles.text}>TODO APP</Text>
-        <TextInput style={styles.input} placeholder="Title" />
-        <TextInput style={styles.input} placeholder="Description" />
-        <TouchableOpacity style={styles.touchableOpacity}>
-          <Text style={styles.buttonText}>Add</Text>
-        </TouchableOpacity>
-      
-      
-      </View>
-    );
+  const dispatch = useDispatch()
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  
+  const addTodoToStore = () => {
+    const obj = {id: Date.now(), title:title, description:description,completed:false};
+    dispatch(addTodo(obj));
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={{fontSize: 20, marginTop: 20, fontWeight: '600'}}>Todo App</Text>
+      <TextInput placeholder="Enter todo title" style={styles.input} onChangeText={(value) => setTitle(value)} />
+      <TextInput placeholder="Enter todo description" style={styles.input} onChangeText={(value) => setDescription(value)}  />
+      <TouchableOpacity style={styles.touchableOpacity} onPress={addTodoToStore}>
+        <Text style={styles.buttonText}>Add</Text>
+      </TouchableOpacity>
+    
+    </View>
+  );
   }
 
   const styles = StyleSheet.create({
@@ -59,6 +69,8 @@ export default function AddTodoScreen({navigation}) {
     buttonText: {
       color: "black",
     },
+
+    
    
   });
 

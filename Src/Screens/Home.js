@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesome } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleCompleted ,deleteTodo} from '../Redux/slice/todo.slice';
+
 import {
     StyleSheet,
     Text,
@@ -7,33 +10,32 @@ import {
     TouchableOpacity,
     FlatList,
 } from 'react-native';
-
+import { TodoDetails } from "../constants";
 
 const HomeScreen = ({ navigation }) => {
-    const [todos, setTodos] = useState([
-        { title: 'hi', description: "bb", id: 5, completed: false }
-    ]);
+    const todos = useSelector((state) => state.todo.todos);
+    const dispatch = useDispatch(); 
 
 
-    const toggleCompleted = (id) => {
-        const updatedTodos = todos.map(todo => {
-            if (todo.id === id) {
-                return { ...todo, completed: !todo.completed };
-            }
-            return todo;
-        });
-        setTodos(updatedTodos);
+    const handleToggleCompleted = (item) => {
+        dispatch(toggleCompleted(item));
+    };
+    const handleDelete = (item) => {
+        dispatch(deleteTodo(item));
     };
 
     return (
+        
         <View>
+        
+        
             <FlatList
                 style={styles.flatList}
                 data={todos}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate('TodoDetails', { todos: item })
+                            navigation.navigate(TodoDetails, { todos: item })
                         }
                     >
                         <View style={styles.item}>
@@ -43,16 +45,17 @@ const HomeScreen = ({ navigation }) => {
                             </View>
                             <View style={styles.icon}>
                                 <FontAwesome
+                                   onPress={() => handleDelete(item)} 
                                     name="trash"
                                     size={20}
                                     color="red"
                                     style={styles.icon}
                                 />
                                 <FontAwesome
-                                    onPress={() => toggleCompleted(item.id)}
+                                    onPress={() => handleToggleCompleted(item)} 
                                     name="check-circle"
                                     size={20}
-                                    color={item.completed ? 'green' : 'black'} 
+                                    color={item.completed ? 'green' : 'black'}
                                     style={styles.icon}
                                 />
                             </View>
@@ -63,7 +66,8 @@ const HomeScreen = ({ navigation }) => {
             />
         </View>
     );
-}
+};
+
 export default HomeScreen;
 
 const styles = StyleSheet.create({
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
     item: {
         backgroundColor: 'cyan',
         flexDirection: 'row',
+        width: '100%',
         padding: 10,
         marginVertical: 5,
         borderRadius: 20,
