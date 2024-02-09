@@ -17,9 +17,24 @@ const todoCompletedSlice = createSlice({
             const item = action.payload;
             state.todos = state.todos.filter(todo => todo.id !== item.id);
         },
+
+        
+        updateTodoCompleted: (state, action) => {
+            const updatedTodo = action.payload;
+            state.todos = state.todos.map(todo => {
+                if (todo.id === updatedTodo.id) {
+                    return {
+                        ...todo,
+                        title: updatedTodo.title,
+                        description: updatedTodo.description
+                    };
+                }
+                return todo;
+            });
+        },
     },
 });
 
-export const {addTodoCompleted,deleteTodoCompleted} = todoCompletedSlice.actions;
+export const {addTodoCompleted,deleteTodoCompleted,updateTodoCompleted} = todoCompletedSlice.actions;
 
 export default todoCompletedSlice;

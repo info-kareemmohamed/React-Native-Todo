@@ -1,40 +1,51 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput,  Alert ,Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { updateTodoNotCompleted } from '../Redux/slice/todonotcompleted.slice';
+import { updateTodoCompleted } from '../Redux/slice/todocompleted.slice';
+import { updateTodo } from '../Redux/slice/todo.slice';
+import { Home } from '../constants';
 
-const TodoDetailsScreen = ({}) => {
-    const [text1, setText1] = useState('');
-    const [text2, setText2] = useState('');
-  
-    const handleButtonPress = () => {
-   
-      Alert.alert('Button Pressed', `Text 1: ${text1}, Text 2: ${text2}`);
+const TodoDetailsScreen = ({ navigation, route }) => {
+    const { todo } = route.params;
+    const dispatch = useDispatch();
+
+    const [title, setTitle] = useState(todo.title);
+    const [description, setDescription] = useState(todo.description);
+
+    const handleUpdate = () => {
+        const updatedTodo = {
+            ...todo,
+            title: title,
+            description: description,
+        };
+        dispatch(updateTodo(updatedTodo));
+        dispatch(updateTodoNotCompleted(updatedTodo));
+        dispatch(updateTodoCompleted(updatedTodo));
+        navigation.navigate(Home);
+
     };
-  
+
     return (
         <View style={styles.container}>
-                 <Text style={styles.text}>TODO APP</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            value={text1}
-            onChangeText={(text) => setText1(text)}
-          />
-    
-        
-          <TextInput
-            style={styles.input}
-            placeholder="Description"
-            value={text2}
-            onChangeText={(text) => setText2(text)}
-          />
-    
-          
-    <TouchableOpacity style={styles.touchableOpacity}>
-          <Text style={styles.buttonText}>Update</Text>
-        </TouchableOpacity>
+            <Text style={styles.text}>TODO APP</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Title"
+                value={title}
+                onChangeText={(text) => setTitle(text)}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Description"
+                value={description}
+                onChangeText={(text) => setDescription(text)}
+            />
+            <TouchableOpacity style={styles.touchableOpacity} onPress={handleUpdate}>
+                <Text style={styles.buttonText}>Update</Text>
+            </TouchableOpacity>
         </View>
-      );
+    );
 };
 
 

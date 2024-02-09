@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate(TodoDetails, { todos: item })
+                            navigation.navigate(TodoDetails, { todo: item })
                         }
                     >
                         <View style={styles.item}>
