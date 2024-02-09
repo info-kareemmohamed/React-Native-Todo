@@ -6,6 +6,8 @@ import CompletedTasksScreen from './Src/Screens/CompletedTasks';
 import HomeScreen from './Src/Screens/Home';
 import NotCompletedTasks from './Src/Screens/NotCompletedTasks';
 import  TodoDetailsScreen  from './Src/Screens/TodoDetails';
+import { store } from "./Src/Redux/Store";
+import { Provider } from 'react-redux'
 
 export default function App() {
   return (
@@ -13,7 +15,9 @@ export default function App() {
     //   <Text>Open up App.js to start working on your app!</Text>
     //   <StatusBar style="auto" />
     // </View>
-    <Router/>
+    <Provider store={store}>
+      <Router />
+    </Provider>
     );
 }
 
