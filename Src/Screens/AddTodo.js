@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../Redux/slice/todo.slice";
 import { addTodoNotCompleted } from "../Redux/slice/todonotcompleted.slice";
@@ -11,7 +11,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { Home } from "../constants";
+
+
 export default function AddTodoScreen({ navigation }) {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('');

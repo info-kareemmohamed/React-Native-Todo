@@ -8,14 +8,14 @@ const todoNotCompletedSlice = createSlice({
     reducers: {
         addTodoNotCompleted: (state, action) => {
             state.todos = [...state.todos, action.payload];
-            console.log("yas");
-            console.log(state.todos);
+            
         },
 
        
         deleteTodoNotCompleted: (state, action) => {
             const item = action.payload;
             state.todos = state.todos.filter(todo => todo.id !== item.id);
+            console.log(item.title);
         },
 
         

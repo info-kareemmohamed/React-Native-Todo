@@ -12,23 +12,21 @@ import {
     TouchableOpacity,
     FlatList,
 } from 'react-native';
-import { TodoDetails } from "../constants";
+import { TodoDetails, screenWidth } from "../constants";
 
 const HomeScreen = ({ navigation }) => {
     const todos = useSelector((state) => state.todo.todos);
     const dispatch = useDispatch(); 
 
-
+  
     const handleToggleCompleted = (item) => {
         dispatch(toggleCompleted(item));
       if(item.completed !=true){  
-        console.log(item.completed +"  tt");
       dispatch(addTodoCompleted(item)) 
       dispatch(deleteTodoNotCompleted(item)) 
 
     }
       else{ 
-        console.log(item.completed +"   ff")
       dispatch(deleteTodoCompleted(item));
       dispatch(addTodoNotCompleted(item));
       }
@@ -36,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
     const handleDelete = (item) => {
         dispatch(deleteTodo(item));
        dispatch(deleteTodoCompleted(item));
+       dispatch(deleteTodoNotCompleted(item));
         
     };
 
@@ -88,7 +87,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     text: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 15,
     },
     flatList: {
         flexDirection: 'column',

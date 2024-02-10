@@ -11,6 +11,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTodo} from '../Redux/slice/todo.slice';
 import { deleteTodoNotCompleted} from '../Redux/slice/todonotcompleted.slice';
+import { deleteTodoCompleted} from '../Redux/slice/todocompleted.slice';
+
+import { TodoDetails } from "../constants";
 
 
 
@@ -22,6 +25,8 @@ const NotCompletedTasks = ({ navigation }) => {
     const handleDelete = (item) => {
         dispatch(deleteTodo(item));
         dispatch(deleteTodoNotCompleted(item));
+        dispatch(deleteTodoCompleted(item));
+
     };
 
 
@@ -35,7 +40,7 @@ const NotCompletedTasks = ({ navigation }) => {
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate('TodoDetails', { todos: item })
+                            navigation.navigate(TodoDetails, { todo: item })
                         }
                     >
                         <View style={styles.item}>

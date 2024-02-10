@@ -7,7 +7,7 @@ const todoSlice = createSlice({
     },
     reducers: {
         addTodo: (state, action) => {
-            const { title, description } = action.payload;
+            const { id,title, description } = action.payload;
             if (!title.trim() && !description.trim()) {
               alert("Title and Description cannot be empty!");
               
@@ -24,7 +24,7 @@ const todoSlice = createSlice({
       
               if (!existingTodo) {
                 state.todos.push({
-                  id: Date.now().toString(),
+                  id,
                   title,
                   description,
                   completed: false,
@@ -39,7 +39,6 @@ const todoSlice = createSlice({
         toggleCompleted: (state, action) => {
             const { id } = action.payload;
             state.todos = state.todos.map(todo => {
-                console.log(id +"    "+ todo.id);
                 if (todo.id === id) {
                     
                     return { ...todo, completed: !todo.completed };

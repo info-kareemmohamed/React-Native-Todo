@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     FlatList,
 } from 'react-native';
+import { TodoDetails } from "../constants";
 
 
 const CompletedTasksScreen = ({ navigation }) => {
@@ -31,7 +32,7 @@ const CompletedTasksScreen = ({ navigation }) => {
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate('TodoDetails', { todos: item })
+                            navigation.navigate(TodoDetails, { todo: item })
                         }
                     >
                         <View style={styles.item}>

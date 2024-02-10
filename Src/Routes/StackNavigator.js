@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
 
     return (
-    <Stack.Navigator initialRouteName={Home} >
+    <Stack.Navigator initialRouteName={Home}  screenOptions={  {headerTitleAlign: "center"}}>
         <Stack.Screen name={Home} component={HomeScreen} />
         <Stack.Screen name={Todos} component={TodosScreen} />
         <Stack.Screen name={TodoDetails} component={TodoDetailsScreen} />

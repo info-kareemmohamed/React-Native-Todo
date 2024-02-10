@@ -8,8 +8,7 @@ const todoCompletedSlice = createSlice({
     reducers: {
         addTodoCompleted: (state, action) => {
             state.todos = [...state.todos, action.payload];
-            console.log("yas");
-            console.log(state.todos);
+          
         },
 
        
